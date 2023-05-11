@@ -3,5 +3,5 @@
   "description": "Post-processing is the process of applying full-screen filters and effects to a camera’s image buffer before it is displayed to screen.",
   "displayName": "Post Processing (Unity Technologies)",
   "version": "1.4.0",
-  "unity": "2020.1"
+  "unity": "2021.3"
 }
