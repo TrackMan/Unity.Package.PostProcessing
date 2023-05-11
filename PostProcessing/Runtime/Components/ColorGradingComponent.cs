@@ -35,11 +35,14 @@ namespace UnityEngine.PostProcessing
         Texture2D m_GradingCurves;
         Color[] m_pixels = new Color[k_CurvePrecision * 2];
 
+        bool supportsRGBAHAlf;
+        bool supportsARGBAHalf;
+
         public override bool active
         {
             get
             {
-                return model.enabled
+                return model != default && model.enabled
                        && !context.interrupted;
             }
         }
@@ -225,7 +228,7 @@ namespace UnityEngine.PostProcessing
 
         TextureFormat GetCurveFormat()
         {
-            if (SystemInfo.SupportsTextureFormat(TextureFormat.RGBAHalf))
+            if (supportsRGBAHAlf)
                 return TextureFormat.RGBAHalf;
 
             return TextureFormat.RGBA32;
@@ -281,7 +284,7 @@ namespace UnityEngine.PostProcessing
 
         RenderTextureFormat GetLutFormat()
         {
-            if (SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf))
+            if (supportsARGBAHalf)
                 return RenderTextureFormat.ARGBHalf;
 
             return RenderTextureFormat.ARGB32;
@@ -425,6 +428,11 @@ namespace UnityEngine.PostProcessing
             GUI.DrawTexture(rect, bakedLut);
         }
 
+        void Awake()
+        {
+            supportsRGBAHAlf = SystemInfo.SupportsTextureFormat(TextureFormat.RGBAHalf);
+            supportsARGBAHalf = SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.ARGBHalf);
+        }
         public override void OnDisable()
         {
             GraphicsUtils.Destroy(m_GradingCurves);

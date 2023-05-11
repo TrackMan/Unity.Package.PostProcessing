@@ -12,9 +12,8 @@ namespace UnityEngine.PostProcessing
         {
             get
             {
-                var settings = model.settings;
-                return model.enabled
-                       && settings.lut != null
+                return model != default && model.enabled && model.settings is UserLutModel.Settings settings
+                       && settings.lut != default
                        && settings.contribution > 0f
                        && settings.lut.height == (int)Mathf.Sqrt(settings.lut.width)
                        && !context.interrupted;

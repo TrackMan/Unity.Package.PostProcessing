@@ -42,7 +42,7 @@ namespace UnityEngine.PostProcessing
         {
             get
             {
-                return model.enabled
+                return model != default && model.enabled
                        && SystemInfo.supportsComputeShaders
                        && !context.interrupted;
             }
@@ -96,6 +96,9 @@ namespace UnityEngine.PostProcessing
 
             if (m_HistogramBuffer == null)
                 m_HistogramBuffer = new ComputeBuffer(k_HistogramBins, sizeof(uint));
+
+            if (s_EmptyHistogramBuffer == null)
+                s_EmptyHistogramBuffer = new uint[k_HistogramBins];
 
             // Downscale the framebuffer, we don't need an absolute precision for auto exposure and it
             // helps making it more stable

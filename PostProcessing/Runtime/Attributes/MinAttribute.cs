@@ -1,4 +1,3 @@
-#if !UNITY_2018_3_OR_NEWER
 namespace UnityEngine.PostProcessing
 {
     public sealed class MinAttribute : PropertyAttribute
@@ -11,4 +10,3 @@ namespace UnityEngine.PostProcessing
         }
     }
 }
-#endif
