@@ -9,7 +9,7 @@ namespace UnityEngine.PostProcessing
             internal static readonly int _ExposureCompensation = Shader.PropertyToID("_ExposureCompensation");
             internal static readonly int _AutoExposure         = Shader.PropertyToID("_AutoExposure");
             internal static readonly int _DebugWidth           = Shader.PropertyToID("_DebugWidth");
-            
+
             //The overloads for the PropertyID werent completely added until 5.5.1, so use int where possible but fallback to strings if required.
 #if UNITY_5_6_OR_NEWER
             internal static readonly int _Histogram            = Shader.PropertyToID("_Histogram");
@@ -96,9 +96,6 @@ namespace UnityEngine.PostProcessing
 
             if (m_HistogramBuffer == null)
                 m_HistogramBuffer = new ComputeBuffer(k_HistogramBins, sizeof(uint));
-
-            if (s_EmptyHistogramBuffer == null)
-                s_EmptyHistogramBuffer = new uint[k_HistogramBins];
 
             // Downscale the framebuffer, we don't need an absolute precision for auto exposure and it
             // helps making it more stable
